@@ -21,7 +21,7 @@ public class DemoAccessApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         System.setProperty("hsqldb.method_class_names", "net.ucanaccess.converters.*");
-        template.update("INSERT INTO ttt(NAME, COUNTER, DEPARTMENT) VALUES('Светлана', 35, 1)");
+        template.update("INSERT INTO ttt(NAME, COUNTER, DEPARTMENT) VALUES('Алёна', 24, 2)");
         List<TableA> tableList = template.query("SELECT ID, NAME, COUNTER, DEPARTMENT FROM ttt;",
                 (rs, rowNum) -> new TableA(rs.getInt("ID"),
                         rs.getString("NAME"),
@@ -30,8 +30,9 @@ public class DemoAccessApplication implements CommandLineRunner {
 
 
         for (TableA table : tableList) {
-            System.out.println("ID: " + table.getId() + ", Name: " + table.getName() + ", Counter: " + table.getCounter() + ", Department: " + table.getDepartment());
+            System.out.println("ID: " + table.getId() + ", Name: " + table.getName() + ", Counter: " + table.getCounter() + ", Is Delivery Counter: " + table.isDelivToTwo() + ", Department: " + table.getDepartment());
         }
-        template.update("DELETE FROM ttt WHERE NAME = 'Светлана'");
+        //template.update("DELETE FROM ttt WHERE NAME = 'Алёна'");
+        System.out.println(tableList.toString());
     }
 }
